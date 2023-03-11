@@ -189,8 +189,10 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
 ?>
 <!DOCTYPE html>
 <html><head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="https://cuchuoicon.com/public/upload/mntuoitho.ico">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
 body {font-family: "lucida grande","Segoe UI",Arial, sans-serif; font-size: 14px;width:1024;padding:1em;margin:0;}
 th {font-weight: normal; color: #1F75CC; background-color: #F0F9FF; padding:.5em 1em .5em .2em;
@@ -201,8 +203,8 @@ thead {border-top: 1px solid #82CFFA; border-bottom: 1px solid #96C4EA;border-le
 #top {height:52px;}
 #mkdir {display:inline-block;float:right;padding-top:16px;}
 label { display:block; font-size:11px; color:#555;}
-#file_drop_target {width:500px; padding:12px 0; border: 4px dashed #ccc;font-size:12px;color:#ccc;
-	text-align: center;float:right;margin-right:20px;}
+#file_drop_target {width:100%; padding:12px 0; border: 4px dashed #ccc;font-size:12px;color:#ccc;
+	text-align: center;float:right;margin-right:0px;}
 #file_drop_target.drag_over {border: 4px dashed #96C4EA; color: #96C4EA;}
 #upload_progress {padding: 4px 0;}
 #upload_progress .error {color:#a00;}
@@ -413,7 +415,7 @@ $(function(){
 			.append( $('<td/>').attr('data-sort',data.is_dir ? -1 : data.size)
 				.html($('<span class="size" />').text(formatFileSize(data.size))) )
 			.append( $('<td/>').attr('data-sort',data.mtime).text(formatTimestamp(data.mtime)) )
-			.append( $('<td/>').text(perms.join('+')) )
+			// .append( $('<td/>').text(perms.join('+')) )
 			.append( $('<td/>').append($dl_link).append( data.is_deleteable ? $delete_link : '') )
 		return $html;
 	}
@@ -448,36 +450,56 @@ $(function(){
 </script>
 </head>
 <body>
-<div id="top">
-   <?php if($allow_create_folder): ?>
-	<form action="?" method="post" id="mkdir" />
-		<label for=dirname>Create New Folder</label><input id=dirname type=text name=name value="" />
-		<input type="submit" value="create" />
-	</form>
 
-   <?php endif; ?>
+<div class="container" style="max-width:100%">
+	<div class="row">
+		<div class="col-3">
+			<img src="https://cuchuoicon.com/public/upload/mntuoitho.png" width="100%" alt="">
+			<div id="top">
 
-   <?php if($allow_upload): ?>
+			<?php if($allow_upload): ?>
+				<form style=" margin-top:10px"/>
+					<div class="row">
+						<div class="col-lg-12">
+							<div id="file_drop_target">
+								<!-- Drag Files Here To Upload
+								<b>or</b> -->
+								<input type="file" multiple />
+							</div>
+						</div>
+					</div>
+				</form>
+			<?php endif; ?>
+			<?php if($allow_create_folder): ?>
+				<form action="?" method="post" id="mkdir" style="width:100%;"/>
+					<div class="row">
+						<div class="col-lg-6" style="padding-right:0">
+						<input type="submit" value="Tạo Thư Mục Mới" style="width:100%"/>
+						</div>
+						<div class="col-lg-6" style="padding-left:0">
+							<input id=dirname type=text name=name value="" style="width:100%"/>
+						</div>
+					</div>
+				</form>
+			<?php endif; ?>
+			</div>
+		</div>
+		<div class="col-9">
+			<div id="breadcrumb">&nbsp;</div>
+			<div id="upload_progress"></div>
+			<table id="table"><thead><tr>
+				<th>Tên file</th>
+				<th>Kích Thước</th>
+				<th>Ngày Tạo</th>
+				<!-- <th>Permissions</th> -->
+				<th>Thao Tác</th>
+			</tr></thead><tbody id="list">
 
-	<div id="file_drop_target">
-		Drag Files Here To Upload
-		<b>or</b>
-		<input type="file" multiple />
+			</tbody></table>
+		</div>
+		
 	</div>
-   <?php endif; ?>
-	<div id="breadcrumb">&nbsp;</div>
 </div>
 
-<div id="upload_progress"></div>
-<table id="table"><thead><tr>
-	<th>Name</th>
-	<th>Size</th>
-	<th>Modified</th>
-	<th>Permissions</th>
-	<th>Actions</th>
-</tr></thead><tbody id="list">
-
-</tbody></table>
-<footer>simple php filemanager by <a href="https://github.com/jcampbell1">jcampbell1</a></footer>
 </body>
 </html>
