@@ -191,7 +191,7 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
 <html><head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="https://cuchuoicon.com/public/upload/mntuoitho.ico">
+	<link rel="shortcut icon" href="../mntuoitho.ico">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
 body {font-family: "lucida grande","Segoe UI",Arial, sans-serif; font-size: 14px;width:1024;padding:1em;margin:0;}
@@ -454,7 +454,7 @@ $(function(){
 <div class="container" style="max-width:100%">
 	<div class="row">
 		<div class="col-3">
-			<img src="https://cuchuoicon.com/public/upload/mntuoitho.png" width="100%" alt="">
+			<img src="../mntuoitho.png" width="100%" alt="">
 			<div id="top">
 
 			<?php if($allow_upload): ?>
